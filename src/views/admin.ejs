@@ -1,0 +1,192 @@
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</header>
+
+<body class="body">
+    <center>
+        <div class="delete same">
+            <br>
+            <br>
+            <h4>Slett journal <br></h4>
+            <br>
+            <input type="text" name="" id="navnslett" class="input form-control" placeholder="Kun brukes av Ledelsen">
+            <br>
+            <button class="btn btn-primary" onclick="deletejournal()">Slett journal</button>
+            <br>
+            <br>
+        </div>
+        <div class="journal same">
+            <br>
+            <br>
+            <h4>Pasient journaler<br></h4>
+            <br>
+            <select name="" id="" class="form-select" style="width: 90%; border-radius: 1ch; border-width: 0ch; border-style: unset;">
+                <%- tb %>
+            </select>
+            <br>
+            <br>
+        </div>
+        <div class="login same">
+            <br>
+            <br>
+            <h4>Udips3 Helse kontoer<br></h4>
+            <br>
+            <select name="" id="account" class="form-select" style="width: 90%; border-radius: 1ch; border-width: 0ch; border-style: unset;">
+                <%- tkonto %>
+            </select>
+            <br>
+            <h4>Slett helse konto<br></h4>
+            <br>
+            <p>trykk på knappen å gå til admin siden igjen å se i listen om kontoen forsvant</p>
+            <p>DU FÅR IKKE NOE ADVARSEL OM SLETTING OM DU TRYKKA PÅ KNAPPEN SE I LISTEN OM KONTOEN ER DER!!</p>
+            <button class="btn btn-primary" onclick="deleteaccount()">Slett konto</button>
+            <br>
+            <br>
+        </div>
+        <div class="opprett same">
+            <br>
+            <br>
+            <h4>Opprett ny helse konto<br></h4>
+            <br>
+            <input type="text" name="" id="brukernavn" class="input form-control" placeholder="brukernavn">
+            <br>
+            <input type="text" name="" id="passord" class="input form-control" placeholder="passord">
+            <br>
+            <p>Trykk på admin side igjen/refresh, etter å ha trykt på knappen for å se om kontoen ble lagt til i liste med folk</p>
+            <p>DU FÅR IKKE NOE VARSEL OM KONTOEN BLE OPPRETTET ELLER IKKE SE I LISTE OVER HELSE KONTOER!</p>
+            <button class="btn btn-primary" onclick="createaccount()">Lag ny konto</button>
+            <br>
+            <br>
+        </div>
+    </center>
+
+</body>
+
+<style>
+    .body {
+        background-color: rgba(97, 97, 97, 0.445);
+        color: white;
+
+    }
+
+    .btn:hover {
+        background-color: rgb(2, 2, 116);
+        border-radius: 3ch;
+    }
+
+    .same {
+        background-color:rgba(38, 60, 121, 0.685);
+        border-color: rgba(255, 255, 255, 0);
+    }
+
+    .delete {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 1%;
+
+    }
+    .journal {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 25%;
+
+    }
+    .login {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 50%;
+
+    }
+    .opprett {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 75%;
+
+    }
+
+    .input {
+        background-color: rgb(68, 68, 68);
+        text-align: center;
+        color: white;
+        width: 90%;
+        border-radius: 1ch;
+        border-width: 0ch;
+        border-style: none;
+    }
+
+
+</style>
+
+<script>
+
+
+    // Login verification for admin page
+    try {
+        let pass = window.prompt("Skriv inn passord")
+        if (pass == "admin2021") {
+
+        } else {
+            location.href = 'http://ubsky.xyz/bleh'
+        }
+    } catch(e) {
+        location.href = 'http://ubsky.xyz/bleh'
+    }
+
+    function deletejournal() {
+        let username = document.getElementById('navnslett').value.replaceAll(' ', '_').toLowerCase()
+
+        try {
+            location.href = `http://ubsky.xyz/profile_remove/${username}`
+        } catch(e) {
+            console.log(e)
+        }
+    }
+    async function createaccount() {
+        let username = document.getElementById('brukernavn').value
+        let password = document.getElementById('passord').value
+
+        try {
+            let get = await fetch(`http://ubsky.xyz/api/token/${username.replaceAll(' ', '_')}/state/newuser/password/${password.replaceAll(' ', '_')}`)
+            console.log(get.text())
+        } catch(e) {
+            console.log(e)
+            return
+        }
+    }
+
+    async function deleteaccount() {
+        let username = document.getElementById('account').value
+
+        try {
+            let get = await fetch(`http://ubsky.xyz/api/accountdelete/${username}`)
+            console.log(get.text())
+        } catch(e) {
+            console.log(e)
+            return
+        }
+    }
+</script>

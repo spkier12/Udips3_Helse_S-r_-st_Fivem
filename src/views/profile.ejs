@@ -1,0 +1,54 @@
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</header>
+
+<body class="body">
+    <center>
+        <br>
+        <button class="btn btn-dark" onclick="update()">Legg til ny info</button>
+        <button class="btn btn-dark">Refresh side</button>
+        <br>
+        <br>
+    </center>
+
+    <table class="table table-transparent table-strippet table-hover body">
+        <thead>
+            <th>Id</th>
+            <th>Navn</th>
+            <th>Fødselsdato</th>
+            <th>Beskrivelse</th>
+            <th>Lagt til av</th>
+            <th>Slett</th>
+        </thead>
+
+        <%- data.replace('null', '').replace(/_/g, ' ') %>
+    </table>
+
+</body>
+
+<style>
+
+    .body {
+        background-color: rgba(37, 37, 37, 0.267);
+        color: rgb(255, 255, 255);
+    }
+
+    .body td:hover {
+        color: tomato;
+    }
+
+</style>
+
+<script>
+    var globaluser = "<%- data2 %>"
+    function slett(id, user) {
+        console.log(id, user.replace(' ', '_'))
+        location.href = `http://ubsky.xyz/profile_row_delete/${id}/user/${user.replace(' ', '_')}`
+    }
+
+    function update() {
+        location.href = `http://ubsky.xyz/profile_just_update/${globaluser.toLowerCase()}`
+        console.log(globaluser)
+    }
+</script>

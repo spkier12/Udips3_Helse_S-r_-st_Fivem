@@ -1,0 +1,122 @@
+<header>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+</header>
+<title>Udips3 av Ulrik</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+
+    <div id="frame" class="frame" style="color: white;">
+        <div class="top-nav">
+            <table class="table table-dark">
+                <thead class="">
+                    <th style="background-color: tomato;">Helse Sør-Øst</th>
+                    <th><button class="button btn btn-dark" onclick="hjem()">Hjem</button></th>
+                    <th><button class="button btn btn-dark" onclick="cad()">CAD/locked</button></th>
+                    <th><button class="button btn btn-dark" onclick="update()">Register</button></th>
+                    <th><button class="button btn btn-dark" onclick="admin()">Admin side</button></th>
+                    <th style="background-color: tomato;"><button id="randomknapp" class="button btn btn-dark" style="background-color: tomato;" onclick="logut()">Denne knappen gjør absolutt ingenting...</button></th>
+                </thead>
+
+            </table>
+        </div>
+            <iframe id="iframe" class="iframe" src="" frameborder="0"></iframe>
+    </div>
+</body>
+
+<style>
+
+    .frame {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+        background-image: url("https://media.discordapp.net/attachments/805194415366078464/805384931923722281/218_screenshots_20210130225029_1.jpg");
+
+    }
+
+    .button {
+        width: 100%;
+        height: 100%;
+        border-radius: 0%;
+        border-style: none;
+        border-width: 0ch;
+    }
+    th:hover {
+        background-color: rgb(102, 13, 175);
+    }
+
+    .input1 {
+        position: absolute;
+        width: 30%;
+        height: 5%;
+        top: 95%;
+        text-align: center;
+        z-index: 100;
+        border-bottom-left-radius: 3ch;
+    }
+
+    .søk {
+        float: right;
+        border-bottom-right-radius: 10ch;
+
+    }
+
+    .iframe {
+        background-color: none, transparent;
+        position: relative;
+        top: 0%;
+        width: 98%;
+        height: 90%;
+        left: 1%;
+        border-radius: 3ch;
+        z-index: 0;
+    }
+
+    .chat {
+        background-color: rgba(0, 255, 255, 0.281);
+        position: fixed;
+        top: 60%;
+        width: 60%;
+        height: 30%;
+        left: 1%;
+        border-radius: 3ch;
+        z-index: 0;
+    }
+    
+
+</style>
+
+<script>
+    window.history.replaceState({}, document.title, "/" + "Du er logget inn! - Ikke refresh siden men log deg ut å inn igjen for refresh");
+    
+    let randomknapp = document.getElementById('randomknapp').innerText = "Pågående oppdatering..."
+    
+    function update() {
+        console.log('update')
+        let iframe = document.getElementById('iframe').src = 'http://ubsky.xyz/profile_new_update'
+    }
+
+    function cad() {
+        console.log('cad')
+        let iframe = document.getElementById('iframe').src = 'https://docs.google.com/spreadsheets/d/1Qu9Oukn6XXjpaGsuqC0MD4NK7vftm5sKDA9rSAnBeak/edit#gid=0'
+    }
+
+    function hjem() {
+        console.log('hjem')
+        let iframe = document.getElementById('iframe').src = ''
+    }
+
+    function admin() {
+        console.log('hjem')
+        let iframe = document.getElementById('iframe').src = 'http://ubsky.xyz/admin'
+    }
+
+    function logut() {
+        location.href = 'http://ubsky.xyz/'
+    }
+
+</script>
